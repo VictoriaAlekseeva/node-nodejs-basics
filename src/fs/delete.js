@@ -1,4 +1,3 @@
-import { error } from 'console';
 import { promises } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,9 +14,7 @@ const remove = async () => {
     }
       );
   } catch (error) {
-    if (error.code = 'ENOENT') {
-      console.error(error.message)
-    } else console.error(error)
+     console.error(error)
   }
 };
 

@@ -14,7 +14,7 @@ const create = async () => {
   } catch (err) {
     if (err.code === 'ENOENT') {
       await promises.writeFile(createdFilePath, 'I am fresh and young');
-    } else console.error(err.message)
+    } else console.error(err)
   }
 };
 
