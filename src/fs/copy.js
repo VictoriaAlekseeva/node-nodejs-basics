@@ -1,3 +1,4 @@
+import {existsSync} from 'fs';
 import { readdir, mkdir, copyFile, constants, stat } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -10,7 +11,7 @@ const destinationFolder = path.join(__dirname, 'files_copy');
 
 const copy = async () => {
     try {
-        await stat(sourceFolder);
+        if (!existsSync(sourceFolder) || existsSync(destinationFolder)) throw new Error ('FS operation failed')
         await mkdir(destinationFolder, { recursive: false });
         const files = await readdir(sourceFolder, { withFileTypes: true });
         for (const file of files) {
@@ -19,9 +20,7 @@ const copy = async () => {
             await copyFile(sourceFile, destinationFile, constants.COPYFILE_EXCL);
         }
     } catch (err) {
-        if (err.code === 'ENOENT' || err.code === 'EEXIST') {
-            throw new Error ('FS operation failed')
-        } else console.error(err);
+        console.error(err);
     }
 };
 
