@@ -1,5 +1,3 @@
-import { argv } from 'node:process';
-
 const parseEnv = () => {
     const envVariables = process.env;
     const prefixVariablesRSS = Object.entries(envVariables).filter(entry => entry[0].startsWith('RSS_'))
