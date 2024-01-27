@@ -1,4 +1,4 @@
-import { promises, constants } from 'fs'
+import { promises, existsSync } from 'fs'
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -8,13 +8,10 @@ const createdFilePath = path.join(__dirname, 'files', 'fresh.txt');
 
 const create = async () => {
   try {
-    await promises.access(createdFilePath, constants.F_OK)
-      .then(() => { throw new Error('FS operation failed') }
-      );
+    if (existsSync(createdFilePath)) throw new Error('FS operation failed');
+    await promises.writeFile(createdFilePath, 'I am fresh and young');
   } catch (err) {
-    if (err.code === 'ENOENT') {
-      await promises.writeFile(createdFilePath, 'I am fresh and young');
-    } else console.error(err)
+    console.error(err)
   }
 };
 
