@@ -1,14 +1,14 @@
 import { createWriteStream } from "fs";
-import path from 'path';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
-const fileToWrite = path.join(__dirname, 'files', 'fileToWrite.txt');
+const fileToWrite = join(__dirname, 'files', 'fileToWrite.txt');
 
 const write = async () => {
-    console.log('press Ctrl + D or Ctrl + Z to exit')
+    console.log("Type text to add it to the 'fileToWrite.txt'. Press Ctrl + C to exit");
     const writableStream = createWriteStream(fileToWrite);
     process.stdin.pipe(writableStream);
     process.stdin.on('end', () => {
