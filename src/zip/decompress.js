@@ -1,17 +1,14 @@
-import path from 'path';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { createGunzip } from 'node:zlib';
-import { pipeline } from 'node:stream';
-import {
-    createReadStream,
-    createWriteStream,
-} from 'node:fs';
+import { createGunzip } from 'zlib';
+import { pipeline } from 'stream';
+import { createReadStream, createWriteStream } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
-const decompressedFile = path.join(__dirname, 'files', 'fileToCompress.txt');
-const fileToDecompress = path.join(__dirname, 'files', 'archive.gz');
+const decompressedFile = join(__dirname, 'files', 'fileToCompress.txt');
+const fileToDecompress = join(__dirname, 'files', 'archive.gz');
 
 const decompress = async () => {
 
