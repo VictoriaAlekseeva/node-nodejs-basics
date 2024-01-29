@@ -12,7 +12,7 @@ const list = async () => {
   try {
     if (!existsSync(readDirPath)) throw new Error('FS operation failed');
     const folderContent = await readdir(readDirPath, { withFileTypes: true });
-    const filesInFolder = folderContent.filter(item => item.isFile()).map(item => item.name.split('.')[0]);
+    const filesInFolder = folderContent.filter(item => item.isFile()).map(item => item.name);
     console.log("List of files in the 'files' folder:")
     console.log(filesInFolder);
   } catch (err) {
